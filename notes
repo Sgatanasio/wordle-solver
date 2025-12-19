@@ -1,0 +1,26 @@
+ -- PREGUNTAS A RESPONDER --
+
+¿Cómo determinamos la mejor palabra para usar siguiente?
+
+3b1b utiliza la entropía. Distribuye todas las palabras permitidas y calcula de cada una la información que recibiría de cada resultado:
+  - Establece un conjunto de palabras posibles
+  - Calcula la esperanza de información que recibiría de cada palabra con cada resultado:  E = sum[p(resultado)*log_2(1/p(resultado))]
+  - Elige la palabra con la esperanza de información más alta
+  - Recalcula el conjunto de palabras posibles
+
+La ejecución es absolutamente infernal. ¿Cómo optimizamos el código?
+
+  - Vectores en vez de sets. 
+    No se que coño me dio por los sets pero para esto son una mierda porque no 
+    son indexados y es muy conveniente tener las palabras indexadas
+
+  - Precalcular matriz de resultados. 
+    Crear una matriz de cada resultado para cada par de palabras, que cada vez 
+    que quiera sacar un resultado sencillamente lo mire y no lo compute.
+
+  - Codificar resultados. 
+    En lugar de almacenar los resultados como un vector, se almacenan como un entero. 
+    Si antes eran de forma [a,b,c,d,e], tales que a, b, c, d, e eran {0,1,2}, ahora 
+    sería un solo entero entre [0-242] de la forma (a*3⁴ + b*3³ + c*3² + d*3¹ + e)
+
+ 
