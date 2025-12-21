@@ -8,6 +8,15 @@
  -- FUNCIONES AUXILIARES --
 */
 
+int pow3(int exp){
+  int retVal = 1;
+  for(int i = 0; i < exp; i++){
+    retVal*=3;
+  }
+
+  return retVal;
+}
+
 std::string vToString(std::vector<int> v){
   std::string retVal = accumulate(v.begin(), v.end(), std::string(),
                           [](const std::string &a, int b) {
@@ -38,8 +47,8 @@ std::vector<int> getResultV(int r){
   std::vector<int> retVal;
   for(int i = 0; i < 5;i++){
     int exp = 4-i;
-    retVal.push_back( r / std::pow(3,exp) );
-    r-=std::pow(3,exp);
+    retVal.push_back( r / pow3(exp) );
+    r-=(r/pow3(exp))*pow3(exp);
   }
 
   return retVal;
